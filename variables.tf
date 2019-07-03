@@ -23,20 +23,7 @@ variable "tags" {
 variable "instance_policy_document" {
   description = "Policy document for instance IAM role"
   type        = string
-
-  default = <<EOF
-{
-  "Version": "2012-10-17",
-  "Statement": [
-      {
-        "Effect": "Allow",
-        "Action": [],
-        "Resource": []
-      }
-  ]
-}
-EOF
-
+  default     = null
 }
 
 variable "alb_subnet_ids" {
