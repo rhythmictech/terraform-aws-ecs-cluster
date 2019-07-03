@@ -26,6 +26,13 @@ variable "instance_policy_document" {
   default     = null
 }
 
+variable "custom_iam_policy" {
+  description = "Whether you're passing a custom policy document"
+  type        = bool
+  default     = false
+}
+
+
 variable "alb_subnet_ids" {
   description = "Subnets ALB will listen on"
   type = list(string)

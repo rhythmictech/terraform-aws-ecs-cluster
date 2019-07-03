@@ -26,7 +26,7 @@ data "aws_iam_policy_document" "ecs-instance-policy-document" {
 }
 
 resource "aws_iam_role_policy" "ecs-instance-policy" {
-  count       = var.instance_policy_document == null ? 0 : 1
+  count       = var.custom_iam_policy ? 1 : 0
   name_prefix = "${var.name}-ec2-role-policy-"
   role        = aws_iam_role.ecs-instance-role.id
   policy      = var.instance_policy_document
