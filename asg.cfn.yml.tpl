@@ -14,7 +14,7 @@ Resources:
       AutoScalingCreationPolicy:
         MinSuccessfulInstancesPercent: 80
       ResourceSignal:
-        Count: 1
+        Count: %{ if desiredCapacity > 0 }1%{ else }0%{ endif }
         Timeout: PT30M    # Set long creation timeout so you can ssh in to troubleshoot if needed
     UpdatePolicy:
     # Ignore differences in group size properties caused by scheduled actions
@@ -31,5 +31,5 @@ Resources:
           - AZRebalance
           - AlarmNotification
           - ScheduledActions
-        WaitOnResourceSignals: true
+        WaitOnResourceSignals: %{ if desiredCapacity > 0 }true%{ else }false%{ endif }
     DeletionPolicy: Delete
