@@ -1,7 +1,16 @@
 data "aws_ami" "ecs" {
   most_recent = true
-  name_regex  = "^amzn2-ami-ecs-hvm"
-  owners      = ["amazon"]
+  owners = ["amazon"]
+
+  filter {
+    name   = "name"
+    values = ["amzn-ami-*-amazon-ecs-optimized"]
+  }
+
+  filter {
+    name   = "owner-alias"
+    values = ["amazon"]
+  }
 
   filter {
     name   = "root-device-type"
