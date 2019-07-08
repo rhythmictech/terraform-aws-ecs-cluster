@@ -1,6 +1,6 @@
 data "aws_ami" "ecs" {
   most_recent = true
-  name_regex  = "^amzn2-ami-ecs-hvm"
+  name_regex  = "^amzn2-ami-ecs-hvm-.*-x86_64-ebs"
   owners      = ["amazon"]
 
   filter {
