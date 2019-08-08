@@ -16,10 +16,10 @@ module "this" {
   #   source                   = "github.com/rhythmictech/terraform-aws-ecs-cluster?ref=1.0.3"
 
   name                     = var.cluster_name
-  tags                     = local.common_tags
-  vpc_id                   = module.vpc.vpc_id
-  alb_subnet_ids           = module.vpc.public_subnets
-  instance_subnet_ids      = module.vpc.private_subnets
+  tags                     = var.tags
+  vpc_id                   = var.vpc_id
+  alb_subnet_ids           = var.public_subnets
+  instance_subnet_ids      = var.private_subnets
   ssh_pubkey               = tls_private_key.ecs_root.public_key_openssh
   instance_type            = "t3.micro"
   region                   = var.region

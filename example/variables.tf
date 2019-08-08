@@ -1,7 +1,6 @@
 # =============================================
 #  Variables 
 # =============================================
-variable "env" {}
 
 variable "cluster_name" {
   description = "Name for ECS Cluster"
@@ -10,20 +9,28 @@ variable "cluster_name" {
 }
 
 variable "region" {
-  type = string
+  type    = string
+  default = "us-east-1"
 }
 
 variable "tags" {
   type        = map(string)
   description = "common tags for all resources"
-  default     = {}
+  default = {
+    terraform_managed = "true"
+  }
 }
 
-locals {
-  common_tags = merge(var.tags, {
-    env                 = var.env
-    terraform_managed   = "true"
-    terraform_workspace = terraform.workspace
-    ecs_cluster         = var.cluster_name
-  })
+variable "vpc_id" {
+  type = string
+}
+
+variable "public_subnets" {
+  description = "Public subnets to add the ECS ALB to"
+  type        = list(string)
+}
+
+variable "private_subnets" {
+  description = "Private subnets to add the ECS EC2 instances to"
+  type        = list(string)
 }
