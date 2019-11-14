@@ -15,7 +15,7 @@ data "template_file" "asg-cfn" {
 }
 
 resource "aws_cloudformation_stack" "ecs-asg" {
-  count = (var.max_instances == 0 ? 0 : 1)
+  count = var.max_instances < 1 ? 0 : 1
   name          = "${var.name}-asg-stack"
   template_body = data.template_file.asg-cfn.rendered
 }
