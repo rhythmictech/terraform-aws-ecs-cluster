@@ -69,7 +69,7 @@ echo ECS_CLUSTER=${aws_ecs_cluster.ecs-cluster.name} >> /etc/ecs/ecs.config
 ${var.userdata_script}
 
 set -euo pipefail
-# Install 
+# Install
 yum install -y aws-cfn-bootstrap
 # Can't signal back if the stack is in UPDATE_COMPLETE state, so ignore failures to do so.
 # CFN will roll back if it expects the signal but doesn't get it anyway.
@@ -80,4 +80,3 @@ yum install -y aws-cfn-bootstrap
 EOF
 
 }
-

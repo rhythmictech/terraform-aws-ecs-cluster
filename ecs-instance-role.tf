@@ -46,4 +46,3 @@ resource "aws_iam_instance_profile" "ecs-instance-profile" {
   #   command = "sleep 10" # wait for instance profile to appear due to https://github.com/terraform-providers/terraform-provider-aws/issues/838
   # }
 }
-

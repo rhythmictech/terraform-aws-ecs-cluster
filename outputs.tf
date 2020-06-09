@@ -32,9 +32,8 @@ output "cluster-name" {
 
 output "cloudformation_asg_template" {
   value = (
-      length(aws_cloudformation_stack.ecs-asg) == 0 ?
-      null :
-      aws_cloudformation_stack.ecs-asg[0].template_body
-    )
+    length(aws_cloudformation_stack.ecs-asg) == 0 ?
+    null :
+    aws_cloudformation_stack.ecs-asg[0].template_body
+  )
 }
-
