@@ -11,6 +11,7 @@ variable "name" {
 }
 
 variable "region" {
+  description = "AWS region, eg `us-east-2`"
   type = string
 }
 
@@ -35,11 +36,6 @@ variable "custom_iam_policy" {
 
 variable "alb_subnet_ids" {
   description = "Subnets ALB will listen on"
-  type        = list(string)
-}
-
-variable "instance_subnet_ids" {
-  description = "Subnets instances will be placed in"
   type        = list(string)
 }
 
