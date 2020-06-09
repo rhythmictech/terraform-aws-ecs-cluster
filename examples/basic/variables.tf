@@ -5,7 +5,7 @@
 variable "cluster_name" {
   description = "Name for ECS Cluster"
   type        = string
-  default     = "ecs_cluster"
+  default     = "ecs-cluster"
 }
 
 variable "region" {
@@ -14,11 +14,11 @@ variable "region" {
 }
 
 variable "tags" {
-  type        = map(string)
-  description = "common tags for all resources"
   default = {
     terraform_managed = "true"
   }
+  description = "common tags for all resources"
+  type        = map(string)
 }
 
 variable "vpc_id" {
@@ -27,10 +27,5 @@ variable "vpc_id" {
 
 variable "public_subnets" {
   description = "Public subnets to add the ECS ALB to"
-  type        = list(string)
-}
-
-variable "private_subnets" {
-  description = "Private subnets to add the ECS EC2 instances to"
   type        = list(string)
 }
