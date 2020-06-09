@@ -1,5 +1,5 @@
 resource "aws_iam_role" "ecs_instance_role" {
-  name_prefix        = "${var.name}-ec2-role-"
+  name_prefix        = "${substr(var.name, 0, 20)}-ec2-role-"
   path               = "/"
   assume_role_policy = data.aws_iam_policy_document.ecs_instance_policy_document.json
 
@@ -38,11 +38,7 @@ resource "aws_iam_role_policy_attachment" "ecs_instance_role_attachment" {
 }
 
 resource "aws_iam_instance_profile" "ecs_instance_profile" {
-  name_prefix = "${var.name}-ecs-instance-profile-"
+  name_prefix = "${substr(var.name, 0, 8)}-ecs-instance-profile-"
   path        = "/"
   role        = aws_iam_role.ecs_instance_role.id
-  # Keeping this here for now "in case". Issue should be fixed but I haven't tested thoroughly.
-  # provisioner "local-exec" {
-  #   command = "sleep 10" # wait for instance profile to appear due to https://github.com/terraform-providers/terraform-provider-aws/issues/838
-  # }
 }
