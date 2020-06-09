@@ -67,7 +67,7 @@
 
 | Name | Version |
 |------|---------|
-| terraform | >= 0.12 |
+| terraform | >= 0.12.19 |
 | aws | ~> 2.65 |
 | template | ~> 2.1 |
 
