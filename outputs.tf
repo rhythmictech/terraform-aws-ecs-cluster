@@ -1,32 +1,32 @@
-output "alb-sg-id" {
+output "alb_sg_id" {
   value = aws_security_group.ecs-alb-sg.id
 }
 
-output "ec2-sg-id" {
+output "ec2_sg_id" {
   value = aws_security_group.ecs_ec2_sg.id
 }
 
-output "cluster-id" {
+output "cluster_id" {
   value = aws_ecs_cluster.ecs-cluster.id
 }
 
-output "alb-arn" {
+output "alb_arn" {
   value = aws_alb.ecs-load-balancer.arn
 }
 
-output "alb-arn-suffix" {
+output "alb_arn_suffix" {
   value = aws_alb.ecs-load-balancer.arn_suffix
 }
 
-output "alb-dns" {
+output "alb_dns" {
   value = aws_alb.ecs-load-balancer.dns_name
 }
 
-output "alb-zone" {
+output "alb_zone" {
   value = aws_alb.ecs-load-balancer.zone_id
 }
 
-output "cluster-name" {
+output "cluster_name" {
   value = aws_ecs_cluster.ecs-cluster.name
 }
 
