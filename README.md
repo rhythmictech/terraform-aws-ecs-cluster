@@ -68,14 +68,14 @@
 | Name | Version |
 |------|---------|
 | terraform | >= 0.12.19 |
-| aws | ~> 2.65 |
+| aws | ~> 2.40 |
 | template | ~> 2.1 |
 
 ## Providers
 
 | Name | Version |
 |------|---------|
-| aws | ~> 2.65 |
+| aws | ~> 2.40 |
 | template | ~> 2.1 |
 
 ## Inputs
