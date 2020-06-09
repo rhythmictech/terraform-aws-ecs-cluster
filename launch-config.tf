@@ -48,6 +48,7 @@ resource "aws_launch_configuration" "ecs-launch-config" {
   ebs_optimized        = true
   iam_instance_profile = aws_iam_instance_profile.ecs-instance-profile.id
 
+  #tfsec:ignore:AWS014
   root_block_device {
     volume_type           = var.volume_type
     volume_size           = var.volume_size
@@ -58,7 +59,7 @@ resource "aws_launch_configuration" "ecs-launch-config" {
     create_before_destroy = true
   }
 
-  security_groups             = [aws_security_group.ecs_ec2_sg.id]
+  security_groups             = [aws_security_group.ecs_ec2_sg.id] #tfsec:ignore:AWS012
   associate_public_ip_address = var.ec2_public_ip
   key_name                    = aws_key_pair.default.key_name
 
@@ -78,5 +79,4 @@ yum install -y aws-cfn-bootstrap
   --resource ASG \
   --region "${var.region}" || true
 EOF
-
 }

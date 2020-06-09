@@ -104,14 +104,14 @@
 
 | Name | Description |
 |------|-------------|
-| alb-arn | n/a |
-| alb-arn-suffix | n/a |
-| alb-dns | n/a |
-| alb-sg-id | n/a |
-| alb-zone | n/a |
+| alb\_arn | n/a |
+| alb\_arn\_suffix | n/a |
+| alb\_dns | n/a |
+| alb\_sg\_id | n/a |
+| alb\_zone | n/a |
 | cloudformation\_asg\_template | n/a |
-| cluster-id | n/a |
-| cluster-name | n/a |
-| ec2-sg-id | n/a |
+| cluster\_id | n/a |
+| cluster\_name | n/a |
+| ec2\_sg\_id | n/a |
 
 <!-- END OF PRE-COMMIT-TERRAFORM DOCS HOOK -->
