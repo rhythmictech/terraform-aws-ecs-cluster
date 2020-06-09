@@ -1,18 +1,18 @@
 locals {
   base_tags = {
-    tf_module = "ecs-cluster"
+    tf_module = "ecs_cluster"
   }
 }
 
 variable "name" {
   description = "common name for resources in this module"
   type        = string
-  default     = "ecs-cluster"
+  default     = "ecs_cluster"
 }
 
 variable "region" {
   description = "AWS region, eg `us-east-2`"
-  type = string
+  type        = string
 }
 
 variable "tags" {

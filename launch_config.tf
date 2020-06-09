@@ -41,12 +41,12 @@ resource "aws_key_pair" "default" {
   }
 }
 
-resource "aws_launch_configuration" "ecs-launch-config" {
+resource "aws_launch_configuration" "ecs_launch_config" {
   name_prefix          = "${var.name}-lc-"
   image_id             = data.aws_ami.ecs.image_id
   instance_type        = var.instance_type
   ebs_optimized        = true
-  iam_instance_profile = aws_iam_instance_profile.ecs-instance-profile.id
+  iam_instance_profile = aws_iam_instance_profile.ecs_instance_profile.id
 
   #tfsec:ignore:AWS014
   root_block_device {
@@ -65,7 +65,7 @@ resource "aws_launch_configuration" "ecs-launch-config" {
 
   user_data = <<EOF
 #!/bin/bash -ex
-echo ECS_CLUSTER=${aws_ecs_cluster.ecs-cluster.name} >> /etc/ecs/ecs.config
+echo ECS_CLUSTER=${aws_ecs_cluster.ecs_cluster.name} >> /etc/ecs/ecs.config
 
 ${var.userdata_script}
 

@@ -1,4 +1,4 @@
-resource "aws_security_group" "ecs-alb-sg" {
+resource "aws_security_group" "ecs_alb_sg" {
   description = "Security Group for ECS-ALB ${var.name}"
   name_prefix = "${var.name}-alb-sg-"
   vpc_id      = var.vpc_id
@@ -17,9 +17,9 @@ resource "aws_security_group" "ecs-alb-sg" {
 }
 
 #tfsec:ignore:AWS005
-resource "aws_alb" "ecs-load-balancer" {
+resource "aws_alb" "ecs_load_balancer" {
   name_prefix     = "ecs-"
-  security_groups = [aws_security_group.ecs-alb-sg.id]
+  security_groups = [aws_security_group.ecs_alb_sg.id]
   subnets         = var.alb_subnet_ids
 
   tags = merge(
