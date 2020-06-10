@@ -35,9 +35,9 @@ module "this" {
 #  Security Group Rules
 ########################################
 
-resource "aws_security_group_rule" "ecs_alb_ingress_80" {
+resource "aws_security_group_rule" "alb_ingress_80" {
   description       = "SG for HTTP traffic"
-  security_group_id = module.this.alb_sg_id
+  security_group_id = module.this.alb_security_group_id
   type              = "ingress"
   from_port         = 80
   to_port           = 80
@@ -45,30 +45,9 @@ resource "aws_security_group_rule" "ecs_alb_ingress_80" {
   cidr_blocks       = ["0.0.0.0/0"] #tfsec:ignore:AWS006
 }
 
-resource "aws_security_group_rule" "ecs_alb_ingress_443" {
-  description       = "SG for HTTPS traffic"
-  security_group_id = module.this.alb_sg_id
-  type              = "ingress"
-  from_port         = 443
-  to_port           = 443
-  protocol          = "tcp"
-  cidr_blocks       = ["0.0.0.0/0"] #tfsec:ignore:AWS006
-}
-
-resource "aws_security_group_rule" "ecs_alb_egress" {
+resource "aws_security_group_rule" "alb_egress_all" {
   description       = "SG for Egress"
-  security_group_id = module.this.alb_sg_id
-  type              = "egress"
-  from_port         = 0
-  to_port           = 0
-  protocol          = "-1"
-  cidr_blocks       = ["0.0.0.0/0"] #tfsec:ignore:AWS007
-}
-
-
-resource "aws_security_group_rule" "ecs_ec2_egress" {
-  description       = "SG rule to allow EC2 egress"
-  security_group_id = module.this.ec2_sg_id
+  security_group_id = module.this.alb_security_group_id
   type              = "egress"
   from_port         = 0
   to_port           = 0

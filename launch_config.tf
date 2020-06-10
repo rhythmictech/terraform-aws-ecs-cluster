@@ -113,3 +113,23 @@ resource "aws_vpc_endpoint" "ec2" {
     },
   )
 }
+
+resource "aws_security_group_rule" "self_to_ecs_ec2" {
+  description       = "Allow ECS EC2 to communicate with self and CFN VPC Endpoint"
+  from_port         = 0
+  protocol          = "-1"
+  security_group_id = aws_security_group.ecs_ec2_sg.id
+  self              = true
+  to_port           = 0
+  type              = "ingress"
+}
+
+resource "aws_security_group_rule" "ecs_ec2_to_self" {
+  description       = "Allow ECS EC2 to communicate with self and CFN VPC Endpoint"
+  from_port         = 0
+  protocol          = "-1"
+  security_group_id = aws_security_group.ecs_ec2_sg.id
+  self              = true
+  to_port           = 0
+  type              = "egress"
+}
