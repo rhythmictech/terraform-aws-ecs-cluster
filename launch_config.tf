@@ -16,7 +16,7 @@ data "aws_ami" "ecs" {
 
 resource "aws_security_group" "ecs_ec2_sg" {
   name_prefix = "${var.name}-ec2-sg-"
-  description = "Seecurity group for ECS ALB"
+  description = "Security group for ECS ALB"
   vpc_id      = var.vpc_id
 
   tags = merge(
@@ -76,7 +76,7 @@ resource "aws_launch_configuration" "ecs_launch_config" {
   }
 
   security_groups             = [aws_security_group.ecs_ec2_sg.id] #tfsec:ignore:AWS012
-  associate_public_ip_address = var.ec2_public_ip
+  associate_public_ip_address = var.assign_ec2_public_ip
   key_name                    = aws_key_pair.default.key_name
 
   user_data = <<EOF
