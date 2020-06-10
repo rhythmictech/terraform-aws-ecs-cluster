@@ -89,17 +89,17 @@
 | vpc\_id | ID of VPC resources will be created in | `string` | n/a | yes |
 | asg\_health\_check\_type | Check instance health with EC2 or ELB checks | `string` | `"EC2"` | no |
 | asg\_max\_size | Maximum batch size for ASG rolling updates | `string` | `1` | no |
+| assign\_ec2\_public\_ip | Whether to assign a public IP to autoscaled instances | `bool` | `true` | no |
 | custom\_iam\_policy | Whether you're passing a custom policy document | `bool` | `false` | no |
-| desired\_instances | Desired instances in ASG | `string` | `2` | no |
-| ec2\_public\_ip | Whether to assign a public IP to autoscaled instances | `string` | `true` | no |
+| desired\_instances | Desired instances in ASG | `number` | `2` | no |
 | instance\_policy\_document | Policy document for instance IAM role | `string` | `null` | no |
 | instance\_type | Instance type to use in ASG | `string` | `"t3.micro"` | no |
-| max\_instances | Max instances in ASG | `string` | `4` | no |
-| min\_instances | Min instances in ASG | `string` | `2` | no |
+| max\_instances | Max instances in ASG | `number` | `4` | no |
+| min\_instances | Min instances in ASG | `number` | `2` | no |
 | name | common name for resources in this module | `string` | `"ecs_cluster"` | no |
 | tags | common tags for all resources | `map(string)` | `{}` | no |
 | userdata\_script | Bash commands to be passed to the instance as userdata. Do NOT include a shebang. | `string` | `"echo 'No additional userdata was passed'"` | no |
-| volume\_size | Size of root volume of ECS instances | `string` | `100` | no |
+| volume\_size | Size of root volume of ECS instances | `number` | `100` | no |
 | volume\_type | Volume type to use for instance root | `string` | `"gp2"` | no |
 
 ## Outputs
@@ -109,11 +109,11 @@
 | alb\_arn | ARN of ALB |
 | alb\_arn\_suffix | ARN suffix of ALB |
 | alb\_dns\_name | DNS name of ALB |
-| alb\_sg\_id | Resource ID for Security Group applied to ALB |
 | alb\_zone\_id | R53 zone ID of ALB |
 | cloudformation\_asg\_template | CloudFormation yaml template body for ASG |
-| cluster\_id | Resource ID of ECS cluster |
-| cluster\_name | ECS cluster name |
-| ec2\_sg\_id | Resource ID for Security Group applied to EC2 instances |
+| ecs\_cluster\_id | Resource ID of ECS cluster |
+| ecs\_cluster\_name | ECS cluster name |
+| security\_group\_alb | Resource ID for Security Group applied to ALB |
+| security\_group\_ec2 | Resource ID for Security Group applied to EC2 instances |
 
 <!-- END OF PRE-COMMIT-TERRAFORM DOCS HOOK -->
