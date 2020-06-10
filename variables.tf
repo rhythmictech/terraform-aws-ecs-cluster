@@ -1,4 +1,3 @@
-
 variable "alb_subnet_ids" {
   description = "Subnets ALB will listen on"
   type        = list(string)
@@ -101,7 +100,6 @@ variable "volume_type" {
   description = "Volume type to use for instance root"
   type        = string
 }
-
 
 data "aws_region" "current" {}
 
