@@ -4,7 +4,6 @@ resource "aws_security_group" "ecs_alb_sg" {
   vpc_id      = var.vpc_id
 
   tags = merge(
-    local.base_tags,
     var.tags,
     {
       "Name" = "${var.name}-alb-sg"
@@ -23,7 +22,6 @@ resource "aws_alb" "ecs_load_balancer" {
   subnets         = var.alb_subnet_ids
 
   tags = merge(
-    local.base_tags,
     var.tags,
     {
       "Name" = "${var.name}-alb"

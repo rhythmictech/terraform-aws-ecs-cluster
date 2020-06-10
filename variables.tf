@@ -11,7 +11,6 @@ variable "asg_health_check_type" {
 }
 
 variable "asg_max_size" {
-  default     = 1
   description = "Maximum batch size for ASG rolling updates"
   type        = string
 }
@@ -69,11 +68,6 @@ variable "name" {
   type        = string
 }
 
-variable "region" {
-  description = "AWS region, eg `us-east-2`"
-  type        = string
-}
-
 variable "ssh_pubkey" {
   description = "Public key for default ssh key"
   type        = string
@@ -108,8 +102,9 @@ variable "volume_type" {
   type        = string
 }
 
+
+data "aws_region" "current" {}
+
 locals {
-  base_tags = {
-    tf_module = "ecs_cluster"
-  }
+  region = data.aws_region.current.name
 }

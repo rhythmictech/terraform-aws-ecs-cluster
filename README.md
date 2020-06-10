@@ -83,12 +83,11 @@
 | Name | Description | Type | Default | Required |
 |------|-------------|------|---------|:--------:|
 | alb\_subnet\_ids | Subnets ALB will listen on | `list(string)` | n/a | yes |
+| asg\_max\_size | Maximum batch size for ASG rolling updates | `string` | n/a | yes |
 | ec2\_subnet\_ids | Subnets EC2 will listen on | `list(string)` | n/a | yes |
-| region | AWS region, eg `us-east-2` | `string` | n/a | yes |
 | ssh\_pubkey | Public key for default ssh key | `string` | n/a | yes |
 | vpc\_id | ID of VPC resources will be created in | `string` | n/a | yes |
 | asg\_health\_check\_type | Check instance health with EC2 or ELB checks | `string` | `"EC2"` | no |
-| asg\_max\_size | Maximum batch size for ASG rolling updates | `string` | `1` | no |
 | assign\_ec2\_public\_ip | Whether to assign a public IP to autoscaled instances | `bool` | `true` | no |
 | custom\_iam\_policy | Whether you're passing a custom policy document | `bool` | `false` | no |
 | desired\_instances | Desired instances in ASG | `number` | `2` | no |

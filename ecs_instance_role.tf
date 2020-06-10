@@ -4,7 +4,6 @@ resource "aws_iam_role" "ecs_instance_role" {
   assume_role_policy = data.aws_iam_policy_document.ecs_instance_policy_document.json
 
   tags = merge(
-    local.base_tags,
     var.tags,
     {
       "Name" = "${var.name}-instance-role"

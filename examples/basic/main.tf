@@ -20,7 +20,6 @@ module "this" {
   alb_subnet_ids    = var.public_subnets
   ssh_pubkey        = tls_private_key.ecs_root.public_key_openssh
   instance_type     = "t3.micro"
-  region            = var.region
   min_instances     = 1
   max_instances     = 2
   desired_instances = 1
