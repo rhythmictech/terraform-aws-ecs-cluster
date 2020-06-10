@@ -14,15 +14,21 @@ resource "tls_private_key" "ecs_root" {
 module "this" {
   source = "../.."
 
-  name              = var.cluster_name
-  tags              = var.tags
-  vpc_id            = var.vpc_id
   alb_subnet_ids    = var.public_subnets
-  ssh_pubkey        = tls_private_key.ecs_root.public_key_openssh
-  instance_type     = "t3.micro"
-  min_instances     = 1
-  max_instances     = 2
+  asg_max_size      = 1
+  ec2_subnet_ids    = var.public_subnets
   desired_instances = 1
+  instance_type     = "t3.micro"
+  max_instances     = 2
+  min_instances     = 1
+  name              = "rhythmic-sandbox"
+  ssh_pubkey        = tls_private_key.ecs_root.public_key_openssh
+  vpc_id            = var.vpc_id
+
+  tags = {
+    terraform_managed = true
+    delete_me         = "please"
+  }
 }
 
 ########################################
@@ -59,15 +65,6 @@ resource "aws_security_group_rule" "ecs_alb_egress" {
   cidr_blocks       = ["0.0.0.0/0"] #tfsec:ignore:AWS007
 }
 
-resource "aws_security_group_rule" "ecs_ec2_ingress_from_alb" {
-  description              = "SG rule to allow ALB to EC2 traffic"
-  security_group_id        = module.this.ec2_sg_id
-  type                     = "ingress"
-  from_port                = 0
-  to_port                  = 0
-  protocol                 = "-1"
-  source_security_group_id = module.this.alb_sg_id
-}
 
 resource "aws_security_group_rule" "ecs_ec2_egress" {
   description       = "SG rule to allow EC2 egress"

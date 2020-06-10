@@ -79,6 +79,26 @@ resource "aws_security_group" "ecs_ec2_sg" {
   }
 }
 
+resource "aws_security_group_rule" "ecs_ec2_ingress_from_alb" {
+  description              = "SG rule to allow ALB to EC2 traffic"
+  security_group_id        = aws_security_group.ecs_ec2_sg.id
+  type                     = "ingress"
+  from_port                = 0
+  to_port                  = 0
+  protocol                 = "-1"
+  source_security_group_id = aws_security_group.ecs_alb_sg.id
+}
+
+resource "aws_security_group_rule" "ecs_ec2_egress_to_alb" {
+  description              = "SG rule to allow ALB to EC2 traffic"
+  security_group_id        = aws_security_group.ecs_ec2_sg.id
+  type                     = "egress"
+  from_port                = 0
+  to_port                  = 0
+  protocol                 = "-1"
+  source_security_group_id = aws_security_group.ecs_alb_sg.id
+}
+
 resource "aws_vpc_endpoint" "ec2" {
   security_group_ids = [aws_security_group.ecs_ec2_sg.id]
   service_name       = "com.amazonaws.${local.region}.cloudformation"
