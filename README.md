@@ -1,4 +1,4 @@
-# ecs_cluster module
+# terraform-aws-ecs-cluster
 
 ## How to use this module
 
@@ -17,7 +17,7 @@
   Example:
   ```terraform
   resource "aws_security_group_rule" "ecs_alb_ingress_80" {
-    security_group_id = "${module.ecs_cluster.alb-sg-id}"
+    security_group_id = module.ecs_cluster.alb-sg-id
     type              = "ingress"
     from_port         = 80
     to_port           = 80
@@ -26,7 +26,7 @@
   }
 
   resource "aws_security_group_rule" "ecs_alb_ingress_443" {
-    security_group_id = "${module.ecs_cluster.alb-sg-id}"
+    security_group_id = module.ecs_cluster.alb-sg-id
     type              = "ingress"
     from_port         = 443
     to_port           = 443
@@ -35,7 +35,7 @@
   }
 
   resource "aws_security_group_rule" "ecs_alb_egress" {
-    security_group_id = "${module.ecs_cluster.alb-sg-id}"
+    security_group_id = module.ecs_cluster.alb-sg-id
     type              = "egress"
     from_port         = 0
     to_port           = 0
@@ -44,16 +44,16 @@
   }
 
   resource "aws_security_group_rule" "ecs_ec2_ingress_from_alb" {
-    security_group_id        = "${module.ecs_cluster.ec2-sg-id}"
+    security_group_id        = module.ecs_cluster.ec2-sg-id
     type                     = "ingress"
     from_port                = 0
     to_port                  = 0
     protocol                 = "-1"
-    source_security_group_id = "${module.ecs_cluster.alb-sg-id}"
+    source_security_group_id = module.ecs_cluster.alb-sg-id
   }
 
   resource "aws_security_group_rule" "ecs_ec2_egress" {
-    security_group_id = "${module.ecs_cluster.ec2-sg-id}"
+    security_group_id = module.ecs_cluster.ec2-sg-id
     type              = "egress"
     from_port         = 0
     to_port           = 0

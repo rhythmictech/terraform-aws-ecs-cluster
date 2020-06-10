@@ -25,13 +25,13 @@ variable "custom_iam_policy" {
 variable "desired_instances" {
   default     = 2
   description = "Desired instances in ASG"
-  type        = string
+  type        = number
 }
 
-variable "ec2_public_ip" {
+variable "assign_ec2_public_ip" {
   default     = true
   description = "Whether to assign a public IP to autoscaled instances"
-  type        = string
+  type        = bool
 }
 
 variable "ec2_subnet_ids" {
@@ -54,13 +54,13 @@ variable "instance_type" {
 variable "max_instances" {
   default     = 4
   description = "Max instances in ASG"
-  type        = string
+  type        = number
 }
 
 variable "min_instances" {
   default     = 2
   description = "Min instances in ASG"
-  type        = string
+  type        = number
 }
 
 variable "name" {
@@ -99,7 +99,7 @@ variable "vpc_id" {
 variable "volume_size" {
   default     = 100
   description = "Size of root volume of ECS instances"
-  type        = string
+  type        = number
 }
 
 variable "volume_type" {
