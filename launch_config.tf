@@ -32,6 +32,22 @@ resource "aws_security_group" "ecs_ec2_sg" {
   }
 }
 
+resource "aws_vpc_endpoint" "ec2" {
+  security_group_ids = [aws_security_group.ecs_ec2_sg.id]
+  service_name       = "com.amazonaws.${var.region}.cloudformation"
+  subnet_ids         = var.ec2_subnet_ids
+  vpc_endpoint_type  = "Interface"
+  vpc_id             = var.vpc_id
+
+  tags = merge(
+    local.base_tags,
+    var.tags,
+    {
+      "Description" = "Allows ECS ${var.name} to signal CloudFormation SignalResource API"
+    },
+  )
+}
+
 resource "aws_key_pair" "default" {
   key_name_prefix = "${var.name}-ssh-key-"
   public_key      = var.ssh_pubkey

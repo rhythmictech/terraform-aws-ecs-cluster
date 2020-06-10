@@ -34,6 +34,11 @@ variable "ec2_public_ip" {
   type        = string
 }
 
+variable "ec2_subnet_ids" {
+  description = "Subnets EC2 will listen on"
+  type        = list(string)
+}
+
 variable "instance_policy_document" {
   default     = null
   description = "Policy document for instance IAM role"

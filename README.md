@@ -83,6 +83,7 @@
 | Name | Description | Type | Default | Required |
 |------|-------------|------|---------|:--------:|
 | alb\_subnet\_ids | Subnets ALB will listen on | `list(string)` | n/a | yes |
+| ec2\_subnet\_ids | Subnets EC2 will listen on | `list(string)` | n/a | yes |
 | region | AWS region, eg `us-east-2` | `string` | n/a | yes |
 | ssh\_pubkey | Public key for default ssh key | `string` | n/a | yes |
 | vpc\_id | ID of VPC resources will be created in | `string` | n/a | yes |
