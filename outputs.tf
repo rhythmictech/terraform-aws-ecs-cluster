@@ -1,14 +1,14 @@
-output "alb_sg_id" {
+output "security_group_alb" {
   description = "Resource ID for Security Group applied to ALB"
   value       = aws_security_group.ecs_alb_sg.id
 }
 
-output "ec2_sg_id" {
+output "security_group_ec2" {
   description = "Resource ID for Security Group applied to EC2 instances"
   value       = aws_security_group.ecs_ec2_sg.id
 }
 
-output "cluster_id" {
+output "ecs_cluster_id" {
   description = "Resource ID of ECS cluster"
   value       = aws_ecs_cluster.ecs_cluster.id
 }
@@ -33,7 +33,7 @@ output "alb_zone_id" {
   value       = aws_alb.ecs_load_balancer.zone_id
 }
 
-output "cluster_name" {
+output "ecs_cluster_name" {
   description = "ECS cluster name"
   value       = aws_ecs_cluster.ecs_cluster.name
 }

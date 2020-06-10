@@ -93,6 +93,6 @@ yum install -y aws-cfn-bootstrap
 /opt/aws/bin/cfn-signal \
   --stack "${var.name}-asg-stack" \
   --resource ASG \
-  --region "${var.region}" || true
+  --region "${local.region}" || true
 EOF
 }
