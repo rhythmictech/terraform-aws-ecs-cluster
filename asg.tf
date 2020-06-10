@@ -3,14 +3,14 @@ data "template_file" "asg_cfn" {
 
   vars = {
     description     = "Autoscaling group for ECS cluster"
-    subnets         = join("\",\"", var.ec2_subnet_ids)
-    launchConfig    = aws_launch_configuration.ecs_launch_config.name
-    minSize         = var.min_instances
-    maxSize         = var.max_instances
     desiredCapacity = var.desired_instances
     healthCheck     = var.asg_health_check_type
+    launchConfig    = aws_launch_configuration.ecs_launch_config.name
+    maxSize         = var.max_instances
     maxBatch        = var.asg_max_size
     minInService    = var.max_instances / 2
+    minSize         = var.min_instances
+    subnets         = join("\",\"", var.ec2_subnet_ids)
   }
 }
 

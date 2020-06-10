@@ -108,11 +108,11 @@
 | alb\_arn | ARN of ALB |
 | alb\_arn\_suffix | ARN suffix of ALB |
 | alb\_dns\_name | DNS name of ALB |
+| alb\_security\_group\_id | Resource ID for Security Group applied to ALB |
 | alb\_zone\_id | R53 zone ID of ALB |
 | cloudformation\_asg\_template | CloudFormation yaml template body for ASG |
+| ec2\_security\_group\_id | Resource ID for Security Group applied to EC2 instances |
 | ecs\_cluster\_id | Resource ID of ECS cluster |
 | ecs\_cluster\_name | ECS cluster name |
-| security\_group\_alb | Resource ID for Security Group applied to ALB |
-| security\_group\_ec2 | Resource ID for Security Group applied to EC2 instances |
 
 <!-- END OF PRE-COMMIT-TERRAFORM DOCS HOOK -->
