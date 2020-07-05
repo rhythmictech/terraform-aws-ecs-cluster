@@ -73,15 +73,9 @@ variable "name" {
   type        = string
 }
 
-variable "ssh_pubkey" {
-  default     = ""
-  description = "Public key for default ssh key. One of `ssh_pubkey` or `ssh_key_pair_name` is required"
-  type        = string
-}
-
 variable "ssh_key_pair_name" {
   default     = ""
-  description = "Name of pre-existing key-pair for use with the EC2 launch config. One of `ssh_pubkey` or `ssh_key_pair_name` is required"
+  description = "Name of pre-existing key-pair for use with the EC2 launch config."
   type        = string
 }
 
