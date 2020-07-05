@@ -9,7 +9,7 @@ Resources:
       MaxSize: "${maxSize}"
       DesiredCapacity: "${desiredCapacity}"
       HealthCheckType: "${healthCheck}"
- 
+
     CreationPolicy:
       AutoScalingCreationPolicy:
         MinSuccessfulInstancesPercent: 80
