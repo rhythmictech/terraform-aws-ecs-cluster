@@ -1,4 +1,7 @@
 # terraform-aws-ecs-cluster
+[![pre-commit-check](https://github.com/rhythmictech/terraform-aws-ecs-cluster/workflows/pre-commit-check/badge.svg)](https://github.com/rhythmictech/terraform-aws-ecs-cluster/actions)
+[![GitHub release (latest by date)](https://img.shields.io/github/v/release/rhythmictech/terraform-aws-ecs-cluster)](https://github.com/rhythmictech/terraform-aws-ecs-cluster/releases)
+<img src="https://img.shields.io/twitter/follow/RhythmicTech?style=social&logo=twitter" alt="follow on Twitter"></a>
 
 ## How to use this module
 
