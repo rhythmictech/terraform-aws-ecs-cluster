@@ -1,16 +1,16 @@
 output "alb_arn" {
   description = "ARN of ALB"
-  value       = aws_alb.ecs_load_balancer.arn
+  value       = aws_alb.this.arn
 }
 
 output "alb_arn_suffix" {
   description = "ARN suffix of ALB"
-  value       = aws_alb.ecs_load_balancer.arn_suffix
+  value       = aws_alb.this.arn_suffix
 }
 
 output "alb_dns_name" {
   description = "DNS name of ALB"
-  value       = aws_alb.ecs_load_balancer.dns_name
+  value       = aws_alb.this.dns_name
 }
 
 output "alb_security_group_id" {
@@ -20,7 +20,7 @@ output "alb_security_group_id" {
 
 output "alb_zone_id" {
   description = "R53 zone ID of ALB"
-  value       = aws_alb.ecs_load_balancer.zone_id
+  value       = aws_alb.this.zone_id
 }
 
 output "ec2_security_group_id" {
@@ -30,12 +30,12 @@ output "ec2_security_group_id" {
 
 output "ecs_cluster_id" {
   description = "Resource ID of ECS cluster"
-  value       = aws_ecs_cluster.ecs_cluster.id
+  value       = aws_ecs_cluster.this.id
 }
 
 output "ecs_cluster_name" {
   description = "ECS cluster name"
-  value       = aws_ecs_cluster.ecs_cluster.name
+  value       = aws_ecs_cluster.this.name
 }
 
 output "cloudformation_asg_template" {

@@ -1,20 +1,27 @@
+
+########################################
+# Application Load Balancer
+########################################
+
 #tfsec:ignore:AWS005
-resource "aws_alb" "ecs_load_balancer" {
+resource "aws_alb" "this" {
   name_prefix     = "ecs-"
   security_groups = [aws_security_group.ecs_alb_sg.id]
   subnets         = var.alb_subnet_ids
 
   tags = merge(
     var.tags,
-    {
-      "Name" = "${var.name}-alb"
-    },
+    { "Name" = "${var.name}-alb" },
   )
 
   lifecycle {
     create_before_destroy = true
   }
 }
+
+########################################
+# Security Group, S.G. Rules
+########################################
 
 resource "aws_security_group" "ecs_alb_sg" {
   description = "Security Group for ECS-ALB ${var.name}"
@@ -23,9 +30,7 @@ resource "aws_security_group" "ecs_alb_sg" {
 
   tags = merge(
     var.tags,
-    {
-      "Name" = "${var.name}-alb-sg"
-    },
+    { "Name" = "${var.name}-alb-sg" },
   )
 
   lifecycle {

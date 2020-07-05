@@ -1,4 +1,19 @@
-data "aws_ami" "ecs" {
+
+########################################
+# AMI and Launch Config
+########################################
+
+locals {
+  get_latest_ami = var.ami_id == ""
+  ami_id         = coalesce(var.ami_id, data.aws_ami.this[0].image_id)
+
+  create_key_pair = var.ssh_key_pair_name == ""
+  key_pair_name   = coalesce(var.ssh_key_pair_name, aws_key_pair.this[0].key_name)
+}
+
+data "aws_ami" "this" {
+  count = local.get_latest_ami ? 1 : 0
+
   most_recent = true
   name_regex  = "^amzn2-ami-ecs-hvm-.*-x86_64-ebs"
   owners      = ["amazon"]
@@ -14,7 +29,9 @@ data "aws_ami" "ecs" {
   }
 }
 
-resource "aws_key_pair" "default" {
+resource "aws_key_pair" "this" {
+  count = local.create_key_pair ? 1 : 0
+
   key_name_prefix = "${var.name}-ssh-key-"
   public_key      = var.ssh_pubkey
 
@@ -23,14 +40,14 @@ resource "aws_key_pair" "default" {
   }
 }
 
-resource "aws_launch_configuration" "ecs_launch_config" {
+resource "aws_launch_configuration" "this" {
+  name_prefix                 = "${var.name}-lc-"
   associate_public_ip_address = var.assign_ec2_public_ip #tfsec:ignore:AWS012
   ebs_optimized               = true
-  key_name                    = aws_key_pair.default.key_name
+  key_name                    = local.key_pair_name
   iam_instance_profile        = aws_iam_instance_profile.ecs_instance_profile.id
-  image_id                    = data.aws_ami.ecs.image_id
+  image_id                    = local.ami_id
   instance_type               = var.instance_type
-  name_prefix                 = "${var.name}-lc-"
   security_groups             = [aws_security_group.ecs_ec2_sg.id] #tfsec:ignore:AWS012
 
   #tfsec:ignore:AWS014
@@ -42,7 +59,7 @@ resource "aws_launch_configuration" "ecs_launch_config" {
 
   user_data = <<EOF
 #!/bin/bash -ex
-echo ECS_CLUSTER=${aws_ecs_cluster.ecs_cluster.name} >> /etc/ecs/ecs.config
+echo ECS_CLUSTER=${aws_ecs_cluster.this.name} >> /etc/ecs/ecs.config
 
 ${var.userdata_script}
 
@@ -62,16 +79,18 @@ EOF
   }
 }
 
+########################################
+# Security Group, S.G. Rules, and VPC Endpoint
+########################################
+
 resource "aws_security_group" "ecs_ec2_sg" {
+  name_prefix = "${var.name}-ec2-sg-"
   description = "Security group for ECS ALB"
-  name_prefix = "${var.name}-ec2-sg"
   vpc_id      = var.vpc_id
 
   tags = merge(
     var.tags,
-    {
-      "Name" = "${var.name}-ec2-sg"
-    },
+    { "Name" = "${var.name}-ec2-sg" },
   )
 
   lifecycle {
@@ -81,22 +100,22 @@ resource "aws_security_group" "ecs_ec2_sg" {
 
 resource "aws_security_group_rule" "ecs_ec2_ingress_from_alb" {
   description              = "SG rule to allow ALB to EC2 traffic"
-  security_group_id        = aws_security_group.ecs_ec2_sg.id
-  type                     = "ingress"
   from_port                = 0
-  to_port                  = 0
   protocol                 = "-1"
+  security_group_id        = aws_security_group.ecs_ec2_sg.id
   source_security_group_id = aws_security_group.ecs_alb_sg.id
+  to_port                  = 0
+  type                     = "ingress"
 }
 
 resource "aws_security_group_rule" "ecs_ec2_egress_to_alb" {
   description              = "SG rule to allow ALB to EC2 traffic"
-  security_group_id        = aws_security_group.ecs_ec2_sg.id
-  type                     = "egress"
   from_port                = 0
-  to_port                  = 0
   protocol                 = "-1"
+  security_group_id        = aws_security_group.ecs_ec2_sg.id
   source_security_group_id = aws_security_group.ecs_alb_sg.id
+  to_port                  = 0
+  type                     = "egress"
 }
 
 resource "aws_vpc_endpoint" "ec2" {
@@ -108,9 +127,7 @@ resource "aws_vpc_endpoint" "ec2" {
 
   tags = merge(
     var.tags,
-    {
-      "Description" = "Allows ECS ${var.name} to signal CloudFormation SignalResource API"
-    },
+    { "Description" = "Allows ECS ${var.name} to signal CloudFormation SignalResource API" },
   )
 }
 

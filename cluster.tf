@@ -1,10 +1,8 @@
-resource "aws_ecs_cluster" "ecs_cluster" {
+resource "aws_ecs_cluster" "this" {
   name = "${var.name}-cluster"
 
   tags = merge(
     var.tags,
-    {
-      "Name" = "${var.name}-cluster"
-    },
+    { "Name" = "${var.name}-cluster" },
   )
 }

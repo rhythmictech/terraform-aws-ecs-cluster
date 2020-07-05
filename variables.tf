@@ -3,6 +3,12 @@ variable "alb_subnet_ids" {
   type        = list(string)
 }
 
+variable "ami_id" {
+  default     = ""
+  description = "ECS AMI ID, defaults to latest Amazon-provided image (`name_regex = ^amzn2-ami-ecs-hvm-.*-x86_64-ebs`)"
+  type        = string
+}
+
 variable "asg_health_check_type" {
   default     = "EC2"
   description = "Check instance health with EC2 or ELB checks"
@@ -68,7 +74,14 @@ variable "name" {
 }
 
 variable "ssh_pubkey" {
-  description = "Public key for default ssh key"
+  default     = ""
+  description = "Public key for default ssh key. One of `ssh_pubkey` or `ssh_key_pair_name` is required"
+  type        = string
+}
+
+variable "ssh_key_pair_name" {
+  default     = ""
+  description = "Name of pre-existing key-pair for use with the EC2 launch config. One of `ssh_pubkey` or `ssh_key_pair_name` is required"
   type        = string
 }
 

@@ -85,8 +85,8 @@
 | alb\_subnet\_ids | Subnets ALB will listen on | `list(string)` | n/a | yes |
 | asg\_max\_size | Maximum batch size for ASG rolling updates | `string` | n/a | yes |
 | ec2\_subnet\_ids | Subnets EC2 will listen on | `list(string)` | n/a | yes |
-| ssh\_pubkey | Public key for default ssh key | `string` | n/a | yes |
 | vpc\_id | ID of VPC resources will be created in | `string` | n/a | yes |
+| ami\_id | ECS AMI ID, defaults to latest Amazon-provided image (`name_regex = ^amzn2-ami-ecs-hvm-.*-x86_64-ebs`) | `string` | `""` | no |
 | asg\_health\_check\_type | Check instance health with EC2 or ELB checks | `string` | `"EC2"` | no |
 | assign\_ec2\_public\_ip | Whether to assign a public IP to autoscaled instances | `bool` | `true` | no |
 | custom\_iam\_policy | Whether you're passing a custom policy document | `bool` | `false` | no |
@@ -96,6 +96,8 @@
 | max\_instances | Max instances in ASG | `number` | `4` | no |
 | min\_instances | Min instances in ASG | `number` | `2` | no |
 | name | common name for resources in this module | `string` | `"ecs_cluster"` | no |
+| ssh\_key\_pair\_name | Name of pre-existing key-pair for use with the EC2 launch config. One of `ssh_pubkey` or `ssh_key_pair_name` is required | `string` | `""` | no |
+| ssh\_pubkey | Public key for default ssh key. One of `ssh_pubkey` or `ssh_key_pair_name` is required | `string` | `""` | no |
 | tags | common tags for all resources | `map(string)` | `{}` | no |
 | userdata\_script | Bash commands to be passed to the instance as userdata. Do NOT include a shebang. | `string` | `"echo 'No additional userdata was passed'"` | no |
 | volume\_size | Size of root volume of ECS instances | `number` | `100` | no |
