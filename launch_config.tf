@@ -64,7 +64,7 @@ EOF
 
 resource "aws_security_group" "ecs_ec2_sg" {
   description = "Security group for ECS ALB"
-  name_prefix = "${var.name}-ec2-sg-"
+  name_prefix = "${var.name}-ec2-sg"
   vpc_id      = var.vpc_id
 
   tags = merge(
