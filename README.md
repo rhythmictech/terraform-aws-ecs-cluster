@@ -99,8 +99,7 @@
 | max\_instances | Max instances in ASG | `number` | `4` | no |
 | min\_instances | Min instances in ASG | `number` | `2` | no |
 | name | common name for resources in this module | `string` | `"ecs_cluster"` | no |
-| ssh\_key\_pair\_name | Name of pre-existing key-pair for use with the EC2 launch config. One of `ssh_pubkey` or `ssh_key_pair_name` is required | `string` | `""` | no |
-| ssh\_pubkey | Public key for default ssh key. One of `ssh_pubkey` or `ssh_key_pair_name` is required | `string` | `""` | no |
+| ssh\_key\_pair\_name | Name of pre-existing key-pair for use with the EC2 launch config. | `string` | `""` | no |
 | tags | common tags for all resources | `map(string)` | `{}` | no |
 | userdata\_script | Bash commands to be passed to the instance as userdata. Do NOT include a shebang. | `string` | `"echo 'No additional userdata was passed'"` | no |
 | volume\_size | Size of root volume of ECS instances | `number` | `100` | no |

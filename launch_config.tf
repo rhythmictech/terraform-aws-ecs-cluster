@@ -6,9 +6,6 @@
 locals {
   get_latest_ami = var.ami_id == ""
   ami_id         = coalesce(var.ami_id, data.aws_ami.this[0].image_id)
-
-  create_key_pair = var.ssh_key_pair_name == ""
-  key_pair_name   = coalesce(var.ssh_key_pair_name, aws_key_pair.this[0].key_name)
 }
 
 data "aws_ami" "this" {
@@ -29,22 +26,11 @@ data "aws_ami" "this" {
   }
 }
 
-resource "aws_key_pair" "this" {
-  count = local.create_key_pair ? 1 : 0
-
-  key_name_prefix = "${var.name}-ssh-key-"
-  public_key      = var.ssh_pubkey
-
-  lifecycle {
-    create_before_destroy = true
-  }
-}
-
 resource "aws_launch_configuration" "this" {
   name_prefix                 = "${var.name}-lc-"
   associate_public_ip_address = var.assign_ec2_public_ip #tfsec:ignore:AWS012
   ebs_optimized               = true
-  key_name                    = local.key_pair_name
+  key_name                    = var.ssh_key_pair_name
   iam_instance_profile        = aws_iam_instance_profile.ecs_instance_profile.id
   image_id                    = local.ami_id
   instance_type               = var.instance_type
