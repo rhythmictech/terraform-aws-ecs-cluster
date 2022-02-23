@@ -118,7 +118,7 @@ No modules.
 | <a name="input_alb_subnet_ids"></a> [alb\_subnet\_ids](#input\_alb\_subnet\_ids) | Subnets ALB will listen on | `list(string)` | n/a | yes |
 | <a name="input_ami_id"></a> [ami\_id](#input\_ami\_id) | ECS AMI ID, defaults to latest Amazon-provided image (`name_regex = ^amzn2-ami-ecs-hvm-.*-x86_64-ebs`) | `string` | `""` | no |
 | <a name="input_asg_health_check_type"></a> [asg\_health\_check\_type](#input\_asg\_health\_check\_type) | Check instance health with EC2 or ELB checks | `string` | `"EC2"` | no |
-| <a name="input_asg_max_size"></a> [asg\_max\_size](#input\_asg\_max\_size) | Maximum batch size for ASG rolling updates | `string` | n/a | yes |
+| <a name="input_asg_max_size"></a> [asg\_max\_size](#input\_asg\_max\_size) | Maximum batch size for ASG rolling updates. Setting this to 0 will prevent ASG creation | `string` | n/a | yes |
 | <a name="input_assign_ec2_public_ip"></a> [assign\_ec2\_public\_ip](#input\_assign\_ec2\_public\_ip) | Whether to assign a public IP to autoscaled instances | `bool` | `true` | no |
 | <a name="input_custom_iam_policy"></a> [custom\_iam\_policy](#input\_custom\_iam\_policy) | Whether you're passing a custom policy document | `bool` | `false` | no |
 | <a name="input_desired_instances"></a> [desired\_instances](#input\_desired\_instances) | Desired instances in ASG | `number` | `2` | no |
