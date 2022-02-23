@@ -16,7 +16,7 @@ variable "asg_health_check_type" {
 }
 
 variable "asg_max_size" {
-  description = "Maximum batch size for ASG rolling updates"
+  description = "Maximum batch size for ASG rolling updates. Setting this to 0 will prevent ASG creation"
   type        = string
 }
 

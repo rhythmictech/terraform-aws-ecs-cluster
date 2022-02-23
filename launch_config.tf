@@ -27,6 +27,8 @@ data "aws_ami" "this" {
 }
 
 resource "aws_launch_configuration" "this" {
+  count = var.max_instances < 1 ? 0 : 1
+
   name_prefix                 = "${var.name}-lc-"
   associate_public_ip_address = var.assign_ec2_public_ip #tfsec:ignore:AWS012
   ebs_optimized               = true
@@ -39,6 +41,7 @@ resource "aws_launch_configuration" "this" {
   #tfsec:ignore:AWS014
   root_block_device {
     delete_on_termination = true
+    encrypted             = true
     volume_size           = var.volume_size
     volume_type           = var.volume_type
   }

@@ -1,17 +1,10 @@
 repos:
   - repo: https://github.com/antonbabenko/pre-commit-terraform
-    rev: v1.31.0
+    rev: v1.54.0
     hooks:
       - id: terraform_docs
         always_run: true
-        args:
-          - --args=--sort-by-required
       - id: terraform_fmt
-      - id: terraform_tflint
-        alias: terraform_tflint_deep
-        name: terraform_tflint_deep
-        args:
-          - --args=--deep
       - id: terraform_tflint
         alias: terraform_tflint_nocreds
         name: terraform_tflint_nocreds
