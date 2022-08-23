@@ -4,6 +4,5 @@ terraform {
 
   required_providers {
     aws      = ">= 2.40"
-    template = "~> 2.1"
   }
 }
